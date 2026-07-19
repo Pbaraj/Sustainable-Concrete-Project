@@ -1,0 +1,199 @@
+= Installation and Setup
+
+== Prerequisites
+
+Install the following software:
+
+* Git
+* Python 3.10 or newer
+* Jupyter Notebook or JupyterLab
+
+== Clone the Repository
+
+Open PowerShell and run:
+
+[source,powershell]
+----
+git clone https://github.com/Pbaraj/Sustainable-Concrete-Project.git
+cd Sustainable-Concrete-Project
+----
+
+== Create a Virtual Environment
+
+Create a Python virtual environment:
+
+[source,powershell]
+----
+python -m venv .venv
+----
+
+Activate it on Windows:
+
+[source,powershell]
+----
+.\.venv\Scripts\Activate.ps1
+----
+
+After activation, PowerShell should show:
+
+[source,text]
+----
+(.venv)
+----
+
+== Install the Required Packages
+
+Upgrade pip:
+
+[source,powershell]
+----
+python -m pip install --upgrade pip
+----
+
+The repository does not currently contain a `requirements.txt` file, so install the packages manually:
+
+[source,powershell]
+----
+pip install pandas numpy scikit-learn torch matplotlib tensorboard jupyter ipykernel
+----
+
+The packages are used for:
+
+[cols="1,2"]
+|===
+|Package |Purpose
+
+|pandas
+|Loading and processing the concrete dataset
+
+|NumPy
+|Numerical operations and saved data arrays
+
+|Scikit-learn
+|Random Forest modelling, preprocessing, and performance evaluation
+
+|PyTorch
+|Building and training the neural network
+
+|Matplotlib
+|Creating plots and visualisations
+
+|TensorBoard
+|Monitoring neural-network training
+
+|Jupyter
+|Running the project notebook
+
+|ipykernel
+|Using the virtual environment as a Jupyter kernel
+|===
+
+== Register the Environment in Jupyter
+
+Run:
+
+[source,powershell]
+----
+python -m ipykernel install --user --name sustainable-concrete --display-name "Python (Sustainable Concrete)"
+----
+
+== Check the Required Files
+
+The repository root should contain the notebook and dataset:
+
+[source,text]
+----
+Sustainable-Concrete-Project/
+├── PB Project.ipynb
+├── sustainable_concrete_dataset.csv
+├── best_model.pth
+├── final_net.pth
+├── net_best.pth
+├── scaler.pkl
+├── data_splits.npz
+└── docs/
+----
+
+The dataset must remain in the same directory as the notebook because the notebook reads:
+
+[source,python]
+----
+datafile = "sustainable_concrete_dataset.csv"
+----
+
+== Start Jupyter Notebook
+
+From the repository root, run:
+
+[source,powershell]
+----
+jupyter notebook
+----
+
+Alternatively, start JupyterLab:
+
+[source,powershell]
+----
+jupyter lab
+----
+
+Open:
+
+[source,text]
+----
+PB Project.ipynb
+----
+
+== Select the Correct Kernel
+
+Inside Jupyter:
+
+. Open the notebook.
+. Select the kernel menu.
+. Choose **Change Kernel** or **Select Kernel**.
+. Select **Python (Sustainable Concrete)**.
+
+== Run the Complete Analysis
+
+Run the notebook cells in order to:
+
+. Load the concrete dataset.
+. Check for missing values.
+. Remove compressive-strength values above 200 MPa.
+. Calculate the water-cement ratio.
+. Prepare the training, validation, and test datasets.
+. Train and evaluate the Random Forest model.
+. Train and evaluate the PyTorch neural network.
+. Compare RMSE, MAE, and R² values.
+. Generate prediction and training visualisations.
+
+== Using the Saved Model Files
+
+The repository also contains previously saved model and preprocessing files:
+
+* `best_model.pth`
+* `final_net.pth`
+* `net_best.pth`
+* `scaler.pkl`
+* `data_splits.npz`
+
+These files can be loaded by the notebook when the corresponding loading cells are executed.
+
+== Start the Project Again Later
+
+Open PowerShell in the repository folder and run:
+
+[source,powershell]
+----
+.\.venv\Scripts\Activate.ps1
+jupyter notebook
+----
+
+== Deactivate the Environment
+
+When finished, run:
+
+[source,powershell]
+----
+deactivate
+----
