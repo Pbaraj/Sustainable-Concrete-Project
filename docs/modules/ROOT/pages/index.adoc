@@ -1,0 +1,157 @@
+= Sustainable Concrete Project
+
+The Sustainable Concrete Project predicts the compressive strength of sustainable concrete mixes using machine learning and deep learning.
+
+The project was developed for the course Artificial Intelligence in Engineering. Its purpose is to estimate concrete strength from mix-design parameters, reduce repeated physical testing, and support more efficient sustainable concrete design.
+
+== Project Objective
+
+The main objective is to predict concrete compressive strength in MPa using concrete mix-design features.
+
+The project compares two models:
+
+* Random Forest Regressor
+* PyTorch feed-forward neural network
+
+== Dataset
+
+The original dataset contains:
+
+* 1,000 samples
+* 10 columns
+* Concrete mix-design parameters
+* Compressive-strength values
+* Environmental indicators
+
+Samples with compressive strength above 200 MPa were removed as extreme outliers.
+
+After filtering, the dataset contains 545 samples.
+
+== Input Features
+
+The models use the following input features:
+
+* Cement
+* Coarse aggregate
+* M-sand
+* Water
+* Admixture
+* Curing age
+* Water-cement ratio
+
+The water-cement ratio is calculated as:
+
+[source,text]
+----
+w_c_ratio = Water / Cement
+----
+
+== Methodology
+
+The project follows this workflow:
+
+. Load the sustainable concrete dataset.
+. Check the data for missing values.
+. Remove unrealistic strength outliers.
+. Calculate the water-cement ratio.
+. Select the input features.
+. Transform the target variable.
+. Split the data into training, validation, and test sets.
+. Train a Random Forest model.
+. Train a PyTorch neural network.
+. Evaluate both models.
+. Compare predicted and actual compressive strength.
+
+== Models
+
+=== Random Forest Regressor
+
+The Random Forest model is used as an interpretable baseline model.
+
+Its configuration includes:
+
+* 250 trees
+* Maximum depth of 12
+* Five-fold cross-validation
+* Random seed of 2025
+
+=== PyTorch Neural Network
+
+The neural network contains:
+
+* 7 input features
+* First hidden layer with 64 neurons
+* Second hidden layer with 32 neurons
+* Third hidden layer with 16 neurons
+* One output value for predicted compressive strength
+
+The training process uses:
+
+* ReLU activation
+* Dropout
+* Early stopping
+* Learning-rate scheduling
+* Weight decay
+* Gradient clipping
+* TensorBoard monitoring
+
+== Results
+
+[cols="1,1,1,1"]
+|===
+|Model |RMSE |MAE |R²
+
+|Random Forest Regressor
+|4.98 MPa
+|3.94 MPa
+|0.971
+
+|PyTorch Neural Network
+|2.27 MPa
+|1.81 MPa
+|0.994
+|===
+
+The PyTorch neural network achieved the best overall prediction performance.
+
+== Key Findings
+
+* The neural network performed better than the Random Forest model.
+* Curing age was the most important input feature.
+* Cement content was the second most important feature.
+* The water-cement ratio contributed to model performance.
+* Most predicted values were close to the actual compressive-strength values.
+
+== Technologies
+
+* Python
+* Pandas
+* NumPy
+* Scikit-learn
+* PyTorch
+* TensorBoard
+* Matplotlib
+* Jupyter Notebook
+
+== Main Project Files
+
+[source,text]
+----
+Sustainable-Concrete-Project/
+├── PB Project.ipynb
+├── Sustainable Concrete Project.pdf
+├── sustainable_concrete_dataset.csv
+├── best_model.pth
+├── final_net.pth
+├── net_best.pth
+├── scaler.pkl
+├── data_splits.npz
+├── docs/
+└── README.md
+----
+
+== Project Scope
+
+This project is intended for academic and educational purposes.
+
+The trained models demonstrate how machine learning can support concrete-strength prediction, but the results should not replace laboratory testing or professional engineering assessment.
