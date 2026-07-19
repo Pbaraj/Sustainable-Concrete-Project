@@ -1,0 +1,6 @@
+name: sustainable-concrete-project
+title: Sustainable Concrete Project
+version: '1.0'
+
+nav:
+  - modules/ROOT/nav.adoc
